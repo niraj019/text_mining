@@ -1,0 +1,21 @@
+import nltk
+import pickle
+
+tags = []
+text = pickle.load(open("test.p", "rb"))
+read_text = text[0].get_speech()
+
+for sentence in read_text:
+    tag = nltk.pos_tag(sentence)
+    for word in tag:
+        tags.append(word)
+print(tags)
+
+def findtags(tag_prefix, tagged_text):
+    cfd = nltk.ConditionalFreqDist((tag, word.lower()) for (word, tag) in tagged_text
+        if tag.startswith(tag_prefix))
+    return dict((tag, cfd[tag].most_common()) for tag in cfd.conditions())
+
+
+tagdict = findtags('CD', tags)
+print(tagdict)
