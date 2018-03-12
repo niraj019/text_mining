@@ -1,0 +1,22 @@
+# Import the api module for the results class
+import search_google.api
+
+# Define buildargs for cse api
+buildargs = {
+  'serviceName': 'customsearch',
+  'version': 'v1',
+  'developerKey': 'AIzaSyBIe7ZvRQgZkdpV1X0Jau4s5l62SYHsZOs'
+}
+# Define cseargs for search
+cseargs = {
+  'q': 'kitty',
+  'cx': '004841027675090652872:nyvjsbirb1m',
+  'num': 3,
+  'fileType': 'png'
+}
+
+# Create a results object
+results = search_google.api.results(buildargs, cseargs)
+# Download the search results to a directory
+results.download_links('downloads')
+
